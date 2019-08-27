@@ -41,8 +41,7 @@ public class CKMetricsMojo extends AbstractMojo {
 	}
 
 	protected MetricsWriter createMetricsWriter(String dirName) {
-		MetricsCSVWriter writer = new MetricsCSVWriter();
-		writer.init(dirName);
+		MetricsCSVWriter writer = new MetricsCSVWriter(dirName);
 		return writer;
 	}
 

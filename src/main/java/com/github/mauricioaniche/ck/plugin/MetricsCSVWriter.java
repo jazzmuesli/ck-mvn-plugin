@@ -13,29 +13,41 @@ import com.github.mauricioaniche.ck.util.ResultWriter;
 public class MetricsCSVWriter implements MetricsWriter{
 
 	private ResultWriter resultWriter;
+	private String classFileName;
+	private String methodFileName;
+	private String variableFileName;
+	private String fieldFileName;
 
-	protected ResultWriter createResultWriter(String dirName) throws IOException {
-		String classFileName = resolveFileName(dirName, "class.csv");
-		String methodFileName = resolveFileName(dirName, "method.csv");
-		String variableFileName = resolveFileName(dirName, "variable.csv");
-		String fieldFileName = resolveFileName(dirName, "field.csv");
-		ResultWriter writer = new ResultWriter(classFileName, methodFileName, variableFileName, fieldFileName);
-		return writer;
+	public MetricsCSVWriter(String dirName) {
+		this.classFileName = resolveFileName(dirName, "class.csv");
+		this.methodFileName = resolveFileName(dirName, "method.csv");
+		this.variableFileName = resolveFileName(dirName, "variable.csv");
+		this.fieldFileName = resolveFileName(dirName, "field.csv");
+		try {
+			this.resultWriter = new ResultWriter(classFileName, methodFileName, variableFileName, fieldFileName);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
 	}
 
+	public String getClassFileName() {
+		return classFileName;
+	}
+	public String getFieldFileName() {
+		return fieldFileName;
+	}
+	public String getMethodFileName() {
+		return methodFileName;
+	}
+
+	public String getVariableFileName() {
+		return variableFileName;
+	}
+	
 	private String resolveFileName(String dirName, String fname) {
 		return Paths.get(dirName, fname).toString();
 	}
 	
-	@Override
-	public void init(String dirName) {
-		try {
-			this.resultWriter = createResultWriter(dirName);
-		} catch (IOException e) {
-			throw new RuntimeException("Cannot initialise for directory " + dirName + " due to " + e.getMessage(), e);
-		}
-	}
-
 	@Override
 	public void notify(CKClassResult result) {
 		try {
