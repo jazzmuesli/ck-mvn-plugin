@@ -5,7 +5,7 @@
 	<groupId>com.github.jazzmuesli</groupId>
 	<artifactId>ck-mvn-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 
 	<name>ck-mvn-plugin</name>
 
@@ -37,7 +37,7 @@
 		<connection>scm:git:git://github.com/jazzmuesli/ck-mvn-plugin.git</connection>
 		<developerConnection>scm:git:git@github.com:jazzmuesli/ck-mvn-plugin.git</developerConnection>
 		<url>https://github.com/jazzmuesli/ck-mvn-plugin</url>
-		<tag>ck-mvn-plugin-1.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<dependencies>
