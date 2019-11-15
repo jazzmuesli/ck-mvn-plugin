@@ -27,7 +27,7 @@ public class CKMetricsMojo extends AbstractMojo {
 		}
 	}
 
-	private void processSourceDirectory(String dirName) {
+	protected void processSourceDirectory(String dirName) {
 		try {
 			getLog().info("Processing " + dirName);
 			if (new File(dirName).exists()) {
