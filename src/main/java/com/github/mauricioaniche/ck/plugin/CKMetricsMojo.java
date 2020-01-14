@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -32,7 +32,8 @@ public class CKMetricsMojo extends AbstractMojo {
 	public static Collection<String> extractDirs(Collection<String> srcDirs ) {
 		Set<String> outDirs = new LinkedHashSet<String>();
 		for (String dir: srcDirs) {
-			outDirs.addAll(Arrays.asList(dir.split("[,;]")));
+			Set<String> parsedDirs = Arrays.stream(dir.split("[,;]")).map(s->s.trim()).collect(Collectors.toSet());
+			outDirs.addAll(parsedDirs);
 		}
 		return outDirs;
 	}
