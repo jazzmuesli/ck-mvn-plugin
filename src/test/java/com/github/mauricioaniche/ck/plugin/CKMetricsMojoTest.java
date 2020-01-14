@@ -2,12 +2,15 @@ package com.github.mauricioaniche.ck.plugin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,6 +21,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.maven.plugin.testing.MojoRule;
 import org.apache.maven.project.MavenProject;
+import org.hamcrest.CoreMatchers;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -33,6 +37,13 @@ public class CKMetricsMojoTest {
 	@Rule
 	public MojoRule rule = new MojoRule();
 
+	@Test
+	public void testExtractDirs() throws Exception {
+		Collection<String> srcDirs = CKMetricsMojo.extractDirs(Arrays.asList("dir1,dir2", "dir3;dir4"));
+		assertEquals(4, srcDirs.size());
+		assertThat(srcDirs, CoreMatchers.hasItem(CoreMatchers.is("dir1")));
+	}
+	
 	@Test
 	public void testPlugin() throws Exception {
 		File pom = new File("./");
