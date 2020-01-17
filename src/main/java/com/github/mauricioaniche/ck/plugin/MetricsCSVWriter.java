@@ -44,7 +44,7 @@ public class MetricsCSVWriter implements MetricsWriter{
 		return variableFileName;
 	}
 	
-	private String resolveFileName(String dirName, String fname) {
+	protected String resolveFileName(String dirName, String fname) {
 		return Paths.get(dirName, fname).toString();
 	}
 	

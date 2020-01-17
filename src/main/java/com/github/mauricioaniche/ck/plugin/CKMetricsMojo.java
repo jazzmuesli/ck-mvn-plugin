@@ -21,7 +21,7 @@ import com.github.mauricioaniche.ck.CK;
 public class CKMetricsMojo extends AbstractMojo {
 
 	@Parameter(defaultValue = "${project}", readonly = true, required = true)
-	protected MavenProject project;
+	public MavenProject project;
 
 	/**
 	 * Extract comma or semicolon-separated list of directores
