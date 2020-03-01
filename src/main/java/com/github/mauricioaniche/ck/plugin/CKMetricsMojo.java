@@ -1,11 +1,7 @@
 package com.github.mauricioaniche.ck.plugin;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -23,21 +19,6 @@ public class CKMetricsMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project}", readonly = true, required = true)
 	public MavenProject project;
 
-	/**
-	 * Extract comma or semicolon-separated list of directores
-	 * 
-	 * @param srcDirs
-	 * @return
-	 */
-	public static Collection<String> extractDirs(Collection<String> srcDirs ) {
-		Set<String> outDirs = new LinkedHashSet<String>();
-		for (String dir: srcDirs) {
-			Set<String> parsedDirs = Arrays.stream(dir.split("[,;]")).map(s->s.trim()).collect(Collectors.toSet());
-			outDirs.addAll(parsedDirs);
-		}
-		return outDirs;
-	}
-	
 	public void execute() throws MojoExecutionException {
 		for (String dirName : getCompileSourceDirs()) {
 			processSourceDirectory(dirName);
@@ -48,11 +29,11 @@ public class CKMetricsMojo extends AbstractMojo {
 	}
 
 	protected Collection<String> getTestCompileSourceDirs() {
-		return extractDirs(project.getTestCompileSourceRoots());
+		return Helper.extractDirs(project.getTestCompileSourceRoots());
 	}
 
 	protected Collection<String> getCompileSourceDirs() {
-		return extractDirs(project.getCompileSourceRoots());
+		return Helper.extractDirs(project.getCompileSourceRoots());
 	}
 
 	protected void processSourceDirectory(String dirName) {

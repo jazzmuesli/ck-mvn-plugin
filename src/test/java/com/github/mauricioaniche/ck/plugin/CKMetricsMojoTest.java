@@ -39,7 +39,7 @@ public class CKMetricsMojoTest {
 
 	@Test
 	public void testExtractDirs() throws Exception {
-		Collection<String> srcDirs = CKMetricsMojo.extractDirs(Arrays.asList("dir1,dir2", "dir3; dir4"));
+		Collection<String> srcDirs = Helper.extractDirs(Arrays.asList("dir1,dir2", "dir3; dir4"));
 		assertEquals(4, srcDirs.size());
 		for (String dir : Arrays.asList("dir1","dir2","dir3","dir4")) {
 			assertThat(srcDirs, CoreMatchers.hasItem(CoreMatchers.is(dir)));	
