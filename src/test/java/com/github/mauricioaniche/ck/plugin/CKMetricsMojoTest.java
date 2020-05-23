@@ -52,7 +52,7 @@ public class CKMetricsMojoTest {
 				filter(p->p.get("class").equals(getClass().getCanonicalName())).
 				findFirst();
 		assertTrue(thisClassMetrics.isPresent());
-		Integer publicMethodsInThisClass = Integer.valueOf(thisClassMetrics.get().get("publicMethods"));
+		Integer publicMethodsInThisClass = Integer.valueOf(thisClassMetrics.get().get("publicMethodsQty"));
 		assertTrue("At least one method is expected, " + publicMethodsInThisClass + " found", publicMethodsInThisClass >= 1);
 		Integer classModifiers = Integer.valueOf(thisClassMetrics.get().get("modifiers"));
 		assertTrue("This class is expected to be public, but found " + classModifiers, Modifier.isPublic(classModifiers));

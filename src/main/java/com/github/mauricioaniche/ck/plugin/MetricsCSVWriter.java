@@ -24,7 +24,7 @@ public class MetricsCSVWriter implements MetricsWriter{
 		this.variableFileName = resolveFileName(dirName, "variable.csv");
 		this.fieldFileName = resolveFileName(dirName, "field.csv");
 		try {
-			this.resultWriter = new ResultWriter(classFileName, methodFileName, variableFileName, fieldFileName);
+			this.resultWriter = new ResultWriter(classFileName, methodFileName, variableFileName, fieldFileName, true);
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
