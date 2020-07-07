@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import com.github.mauricioaniche.ck.CKClassResult;
-import com.github.mauricioaniche.ck.util.ResultWriter;
+import com.github.mauricioaniche.ck.ResultWriter;
 
 /**
  * Write metrics as CSV
