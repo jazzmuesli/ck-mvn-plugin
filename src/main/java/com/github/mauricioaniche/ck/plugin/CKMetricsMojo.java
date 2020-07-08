@@ -1,6 +1,12 @@
 package com.github.mauricioaniche.ck.plugin;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -19,10 +25,12 @@ public class CKMetricsMojo extends AbstractMojo {
 	protected MavenProject project;
 
 	public void execute() throws MojoExecutionException {
-		for (String dirName : project.getCompileSourceRoots()) {
+		List<String> compileSourceRoots = project.getCompileSourceRoots();
+		for (String dirName : extractDirs(compileSourceRoots)) {
 			processSourceDirectory(dirName);
 		}
-		for (String dirName : project.getTestCompileSourceRoots()) {
+		List<String> testCompileSourceRoots = project.getTestCompileSourceRoots();
+		for (String dirName : extractDirs(testCompileSourceRoots)) {
 			processSourceDirectory(dirName);
 		}
 	}
@@ -45,4 +53,12 @@ public class CKMetricsMojo extends AbstractMojo {
 		return writer;
 	}
 
+	public static Collection<String> extractDirs(Collection<String> srcDirs ) {
+		Set<String> outDirs = new LinkedHashSet<String>();
+		for (String dir: srcDirs) {
+			Set<String> parsedDirs = Arrays.stream(dir.split("[,;]")).map(s->s.trim()).collect(Collectors.toSet());
+			outDirs.addAll(parsedDirs);
+		}
+		return outDirs;
+	}
 }
