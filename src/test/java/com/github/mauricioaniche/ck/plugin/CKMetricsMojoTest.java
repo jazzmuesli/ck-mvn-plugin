@@ -69,9 +69,10 @@ public class CKMetricsMojoTest {
 	}
 
 	private List<CSVRecord> getMetrics(List<String> testDirs, String fname) throws IOException {
-		String fullFileName = testDirs.get(0) + "/" + fname;
+		String fullFileName = testDirs.get(0) + File.separator + fname;
+		String suffixToTest = (new StringBuffer()).append("src").append(File.separator).append("test").append(File.separator).append("java").append(File.separator).append(fname).toString();
 		assertTrue("Unexpected " + fname + " filename: " + fullFileName,
-				fullFileName.endsWith("src/test/java/" + fname));
+				fullFileName.endsWith(suffixToTest));
 		
 		File file = new File(fullFileName);
 		assertTrue("File " + file + " does not exist", file.exists());
